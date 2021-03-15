@@ -1,7 +1,6 @@
 package com.gabrielpsz.dextrachallenge.service;
 
-import com.gabrielpsz.dextrachallenge.domain.MarvelCharacter;
-import com.gabrielpsz.dextrachallenge.domain.MarvelResponse;
+import com.gabrielpsz.dextrachallenge.domain.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -42,4 +43,23 @@ public class CharacterService {
         return forEntity.getBody().getData().getResults();
     }
 
+    public MarvelCharacter getCharacterById(String id) {
+        return null;
+    }
+
+    public List<Comics> getCharacterComics(String id) {
+        return Collections.emptyList();
+    }
+
+    public List<Events> getCharacterEvents(String id) {
+        return Collections.emptyList();
+    }
+
+    public List<Series> getCharacterSeries(String id) {
+        return Collections.emptyList();
+    }
+
+    public List<Stories> getCharacterStories(String id) {
+        return Collections.emptyList();
+    }
 }
