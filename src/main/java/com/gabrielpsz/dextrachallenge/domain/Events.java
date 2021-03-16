@@ -1,13 +1,22 @@
 package com.gabrielpsz.dextrachallenge.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Events{
-    public int available;
-    public String collectionURI;
-    public List<Item> items;
-    public int returned;
+    private int id;
+    private String title;
+    private String description;
+    private int available;
+    private String collectionURI;
+    private List<Item> items;
+    private int returned;
 }
