@@ -1,5 +1,6 @@
 package com.gabrielpsz.dextrachallenge.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;

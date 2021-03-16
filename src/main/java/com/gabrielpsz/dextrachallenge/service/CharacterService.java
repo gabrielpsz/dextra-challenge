@@ -7,20 +7,25 @@ import com.gabrielpsz.dextrachallenge.domain.*;
 import com.gabrielpsz.dextrachallenge.exceptions.ApiErrorException;
 import com.gabrielpsz.dextrachallenge.utils.ApiError;
 import com.google.gson.Gson;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class CharacterService {
 
     private static String BASE_URL = "https://gateway.marvel.com:443";
-
     @Value("${marvel.apiKey.public}")
     private String PUBLIC_API_KEY;
     @Value("${marvel.apiKey.private}")
@@ -34,11 +39,6 @@ public class CharacterService {
         this.restTemplate = new RestTemplate();
     }
 
-//    public Mono<MarvelCharacter> getCharacterByName(String name) {
-//        return this.webClient.get().url("/{name}/details", name)
-//                .retrieve().bodyToMono(MarvelCharacter.class);
-//    }
-
     public List<MarvelCharacter> getAllCharacters() throws ApiErrorException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
@@ -50,6 +50,8 @@ public class CharacterService {
         } catch(HttpStatusCodeException e) {
             ApiError error = getApiError(e);
             throw new ApiErrorException(error.getCode(), error.getStatus() == null ? error.getMessage() : error.getStatus());
+        } catch (Exception e) {
+            throw new ApiErrorException(null, e.getMessage());
         }
     }
 
@@ -66,6 +68,8 @@ public class CharacterService {
         } catch (HttpStatusCodeException e) {
             ApiError error = getApiError(e);
             throw new ApiErrorException(error.getCode(), error.getStatus() == null ? error.getMessage() : error.getStatus());
+        } catch (Exception e) {
+            throw new ApiErrorException(null, e.getMessage());
         }
     }
 
@@ -85,8 +89,10 @@ public class CharacterService {
         } catch (HttpStatusCodeException e) {
             ApiError error = getApiError(e);
             throw new ApiErrorException(error.getCode(), error.getStatus() == null ? error.getMessage() : error.getStatus());
-        } catch (ApiErrorException e) {
+        }  catch (ApiErrorException e) {
             throw e;
+        } catch (Exception e) {
+            throw new ApiErrorException(e.getMessage(), null);
         }
     }
 
@@ -108,6 +114,8 @@ public class CharacterService {
             throw new ApiErrorException(error.getCode(), error.getStatus() == null ? error.getMessage() : error.getStatus());
         } catch (ApiErrorException e) {
             throw e;
+        } catch (Exception e) {
+            throw new ApiErrorException(e.getMessage(), null);
         }
     }
 
@@ -127,8 +135,10 @@ public class CharacterService {
         } catch (HttpStatusCodeException e) {
             ApiError error = getApiError(e);
             throw new ApiErrorException(error.getCode(), error.getStatus() == null ? error.getMessage() : error.getStatus());
-        } catch (ApiErrorException e) {
+        }  catch (ApiErrorException e) {
             throw e;
+        } catch (Exception e) {
+            throw new ApiErrorException(e.getMessage(), null);
         }
     }
 
@@ -150,6 +160,8 @@ public class CharacterService {
             throw new ApiErrorException(error.getCode(), error.getStatus() == null ? error.getMessage() : error.getStatus());
         } catch (ApiErrorException e) {
             throw e;
+        } catch (Exception e) {
+            throw new ApiErrorException(e.getMessage(), null);
         }
     }
 
