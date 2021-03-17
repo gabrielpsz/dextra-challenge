@@ -9,4 +9,4 @@ Dextra backend project challenge
 2. After build, to run the project you might do:
     - Run **java -jar target/dextra-challenge-0.0.1-SNAPSHOT.jar** at the project root folder
     
-3. Its done, the server will run on port 8090.
+3. Its done, the server will run on port 8080.
