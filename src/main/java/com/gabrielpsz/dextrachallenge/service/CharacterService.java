@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gabrielpsz.dextrachallenge.constants.MarvelEndpoints;
 import com.gabrielpsz.dextrachallenge.domain.*;
-import com.gabrielpsz.dextrachallenge.exceptions.EmptyRequestContent;
+import com.gabrielpsz.dextrachallenge.controller.exceptions.EmptyRequestContent;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections4.MapUtils;

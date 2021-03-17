@@ -1,4 +1,4 @@
-package com.gabrielpsz.dextrachallenge.exceptions;
+package com.gabrielpsz.dextrachallenge.controller.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

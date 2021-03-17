@@ -1,7 +1,7 @@
 package com.gabrielpsz.dextrachallenge.controller;
 
 import com.gabrielpsz.dextrachallenge.domain.*;
-import com.gabrielpsz.dextrachallenge.exceptions.EmptyRequestContent;
+import com.gabrielpsz.dextrachallenge.controller.exceptions.EmptyRequestContent;
 import com.gabrielpsz.dextrachallenge.service.CharacterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

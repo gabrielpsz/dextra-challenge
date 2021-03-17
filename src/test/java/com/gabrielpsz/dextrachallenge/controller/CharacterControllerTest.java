@@ -2,7 +2,7 @@ package com.gabrielpsz.dextrachallenge.controller;
 
 import com.gabrielpsz.dextrachallenge.domain.Comics;
 import com.gabrielpsz.dextrachallenge.domain.MarvelCharacter;
-import com.gabrielpsz.dextrachallenge.exceptions.EmptyRequestContent;
+import com.gabrielpsz.dextrachallenge.controller.exceptions.EmptyRequestContent;
 import com.gabrielpsz.dextrachallenge.service.CharacterService;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
