@@ -13,7 +13,7 @@ Dextra backend project challenge
 
 The list of endpoints is:
 - [Characters](http://localhost:8080/v1/public/characters")
-- [Characters by ID](http://localhost:8080/v1/public/characters/{id}")
+- [Character by ID](http://localhost:8080/v1/public/characters/{id}")
 - [Character Comics by Character Id](http://localhost:8080/v1/public/characters/{id}/comics")
 - [Character Events by Character Id](http://localhost:8080/v1/public/characters/{id}/events")
 - [Character Series by Character Id](http://localhost:8080/v1/public/characters/{id}/series")
