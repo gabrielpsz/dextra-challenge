@@ -68,7 +68,7 @@ public class CharacterControllerTest {
 
     @Test
     public void shouldReturnSuccess_whenCallGetAllCharacter() {
-        Mockito.when(characterService.getAllCharacters()).thenReturn(List.of(new MarvelCharacter(1)));
+        Mockito.when(characterService.getAllCharacters(null)).thenReturn(List.of(new MarvelCharacter(1)));
         RestAssuredMockMvc
                 .given()
                 .contentType(ContentType.JSON)

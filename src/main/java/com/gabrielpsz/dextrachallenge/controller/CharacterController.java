@@ -5,13 +5,11 @@ import com.gabrielpsz.dextrachallenge.exceptions.EmptyRequestContent;
 import com.gabrielpsz.dextrachallenge.service.CharacterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -25,9 +23,9 @@ public class CharacterController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MarvelCharacter>> getAllCharacters()  {
+    public ResponseEntity<List<MarvelCharacter>> getAllCharacters(@RequestParam Map<String,String> params)  {
         log.info("Request to get all characters");
-        List<MarvelCharacter> allCharacters = characterService.getAllCharacters();
+        List<MarvelCharacter> allCharacters = characterService.getAllCharacters(params);
         return ResponseEntity.ok().body(allCharacters);
     }
 
