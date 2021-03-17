@@ -42,7 +42,6 @@ public class CharacterService {
         try {
             ResponseEntity<MarvelResponse> forEntity = restTemplate.getForEntity(url, MarvelResponse.class);
             List<Object> results = forEntity.getBody().getData().getResults();
-
             List<MarvelCharacter> list = mapper.convertValue(results, new TypeReference<>() { });
             return list;
         } catch(HttpStatusCodeException e) {
@@ -50,10 +49,10 @@ public class CharacterService {
         }
     }
 
-    public MarvelCharacter getCharacterById(String id) throws HttpStatusCodeException, NumberFormatException {
+    public MarvelCharacter getCharacterById(String id, Map<String,String> params) throws HttpStatusCodeException, NumberFormatException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
-        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.CHARACTER_BY_ID.replaceAll("\\{id}", id), timestamp, md5Hash, null);
+        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.CHARACTER_BY_ID.replaceAll("\\{id}", id), timestamp, md5Hash, params);
         try {
             ResponseEntity<MarvelResponse> responseEntity = restTemplate.getForEntity(url, MarvelResponse.class);
             return getMarvelCharacterFromMarvelResponse(responseEntity);
@@ -64,10 +63,10 @@ public class CharacterService {
         }
     }
 
-    public List<Comics> getCharacterComics(String id) throws EmptyRequestContent, HttpStatusCodeException {
+    public List<Comics> getCharacterComics(String id, Map<String,String> params) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
-        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.COMICS_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, null);
+        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.COMICS_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, params);
         try {
             ResponseEntity<MarvelResponse> responseEntity = restTemplate.getForEntity(url, MarvelResponse.class);
             List<Object> results = responseEntity.getBody().getData().getResults();
@@ -81,10 +80,10 @@ public class CharacterService {
         }
     }
 
-    public List<Events> getCharacterEvents(String id) throws EmptyRequestContent, HttpStatusCodeException {
+    public List<Events> getCharacterEvents(String id, Map<String,String> params) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
-        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.EVENTS_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, null);
+        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.EVENTS_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, params);
         try {
             ResponseEntity<MarvelResponse> responseEntity = restTemplate.getForEntity(url, MarvelResponse.class);
             List<Object> results = responseEntity.getBody().getData().getResults();
@@ -98,10 +97,10 @@ public class CharacterService {
         }
     }
 
-    public List<Series> getCharacterSeries(String id) throws EmptyRequestContent, HttpStatusCodeException {
+    public List<Series> getCharacterSeries(String id, Map<String,String> params) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
-        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.SERIES_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, null);
+        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.SERIES_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, params);
         try {
             ResponseEntity<MarvelResponse> responseEntity = restTemplate.getForEntity(url, MarvelResponse.class);
             List<Object> results = responseEntity.getBody().getData().getResults();
@@ -115,10 +114,10 @@ public class CharacterService {
         }
     }
 
-    public List<Stories> getCharacterStories(String id) throws EmptyRequestContent, HttpStatusCodeException {
+    public List<Stories> getCharacterStories(String id, Map<String,String> params) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
-        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.STORIES_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, null);
+        String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.STORIES_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash, params);
         try {
             ResponseEntity<MarvelResponse> responseEntity = restTemplate.getForEntity(url, MarvelResponse.class);
             List<Object> results = responseEntity.getBody().getData().getResults();

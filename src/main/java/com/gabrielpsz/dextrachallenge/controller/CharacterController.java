@@ -30,37 +30,37 @@ public class CharacterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MarvelCharacter> getCharacterById(@PathVariable String id) throws HttpStatusCodeException {
+    public ResponseEntity<MarvelCharacter> getCharacterById(@PathVariable String id, @RequestParam Map<String,String> params) throws HttpStatusCodeException {
         log.info("Request to get character with id {}", id);
-        MarvelCharacter character = characterService.getCharacterById(id);
+        MarvelCharacter character = characterService.getCharacterById(id, params);
         return ResponseEntity.ok().body(character);
     }
 
     @GetMapping("/{id}/comics")
-    public ResponseEntity<List<Comics>> getCharacterComics(@PathVariable String id) throws EmptyRequestContent {
+    public ResponseEntity<List<Comics>> getCharacterComics(@PathVariable String id, @RequestParam Map<String,String> params) throws EmptyRequestContent {
         log.info("Request to get comics list from character with id {}", id);
-        List<Comics> characterComics = characterService.getCharacterComics(id);
+        List<Comics> characterComics = characterService.getCharacterComics(id, params);
         return ResponseEntity.ok().body(characterComics);
     }
 
     @GetMapping("/{id}/events")
-    public ResponseEntity<List<Events>> getCharacterEvents(@PathVariable String id) throws EmptyRequestContent {
+    public ResponseEntity<List<Events>> getCharacterEvents(@PathVariable String id, @RequestParam Map<String,String> params) throws EmptyRequestContent {
         log.info("Request to get events list from character with id {}", id);
-        List<Events> characterEvents = characterService.getCharacterEvents(id);
+        List<Events> characterEvents = characterService.getCharacterEvents(id, params);
         return ResponseEntity.ok().body(characterEvents);
     }
 
     @GetMapping("/{id}/series")
-    public ResponseEntity<List<Series>> getCharacterSeries(@PathVariable String id) throws EmptyRequestContent {
+    public ResponseEntity<List<Series>> getCharacterSeries(@PathVariable String id, @RequestParam Map<String,String> params) throws EmptyRequestContent {
         log.info("Request to get series list from character with id {}", id);
-        List<Series> characterSeries = characterService.getCharacterSeries(id);
+        List<Series> characterSeries = characterService.getCharacterSeries(id, params);
         return ResponseEntity.ok().body(characterSeries);
     }
 
     @GetMapping("/{id}/stories")
-    public ResponseEntity<List<Stories>> getCharacterStories(@PathVariable String id) throws EmptyRequestContent {
+    public ResponseEntity<List<Stories>> getCharacterStories(@PathVariable String id, @RequestParam Map<String,String> params) throws EmptyRequestContent {
         log.info("Request to get stories list from character with id {}", id);
-        List<Stories> characterStories = characterService.getCharacterStories(id);
+        List<Stories> characterStories = characterService.getCharacterStories(id, params);
         return ResponseEntity.ok().body(characterStories);
     }
 
