@@ -18,4 +18,8 @@ public class Comics{
     private List<Item> items;
     private int returned;
     private String title;
+
+    public Comics(String title) {
+        this.title = title;
+    }
 }

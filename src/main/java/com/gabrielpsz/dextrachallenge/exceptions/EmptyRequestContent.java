@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiErrorException extends Exception {
+public class EmptyRequestContent extends Exception {
     private int code;
     private String status;
 }

@@ -1,7 +1,8 @@
 package com.gabrielpsz.dextrachallenge.controller;
 
+import com.gabrielpsz.dextrachallenge.domain.Comics;
 import com.gabrielpsz.dextrachallenge.domain.MarvelCharacter;
-import com.gabrielpsz.dextrachallenge.exceptions.ApiErrorException;
+import com.gabrielpsz.dextrachallenge.exceptions.EmptyRequestContent;
 import com.gabrielpsz.dextrachallenge.service.CharacterService;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -13,12 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestClientResponseException;
+
+import java.util.List;
 
 
 @WebMvcTest(CharacterController.class)
@@ -65,6 +64,51 @@ public class CharacterControllerTest {
                 .body("code", Matchers.equalTo(404))
                 .body("message", Matchers.equalTo("We couldn't find that character"));
 
+    }
+
+    @Test
+    public void shouldReturnSuccess_whenCallGetAllCharacter() {
+        Mockito.when(characterService.getAllCharacters()).thenReturn(List.of(new MarvelCharacter(1)));
+        RestAssuredMockMvc
+                .given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .when()
+                .get("/v1/public/characters")
+                .then()
+                .statusCode(200)
+                .body("[0].id", Matchers.equalTo(1));
+
+    }
+
+    @Test
+    public void shouldReturnSuccess_whenCallGetCharacterComics() throws EmptyRequestContent {
+        Mockito.when(characterService.getCharacterComics("1")).thenReturn(List.of(new Comics()));
+        RestAssuredMockMvc
+                .given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .when()
+                .get("/v1/public/characters/{id}/comics", 1)
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    public void shouldReturnError_whenCallGetCharacterComicsToCharacterWithoutComics() throws EmptyRequestContent {
+        Mockito.when(characterService.getCharacterComics("1"))
+                .thenThrow(new EmptyRequestContent(HttpStatus.NOT_FOUND.value(), "There is no comics for this character."));
+
+        RestAssuredMockMvc
+                .given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .when()
+                .get("/v1/public/characters/{id}/comics", 1)
+                .then()
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .body("code", Matchers.equalTo(HttpStatus.NOT_FOUND.value()))
+                .body("message", Matchers.equalTo("There is no comics for this character."));
     }
 
 }

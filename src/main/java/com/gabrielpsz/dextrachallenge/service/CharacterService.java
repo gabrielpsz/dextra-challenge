@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gabrielpsz.dextrachallenge.constants.MarvelEndpoints;
 import com.gabrielpsz.dextrachallenge.domain.*;
-import com.gabrielpsz.dextrachallenge.exceptions.ApiErrorException;
+import com.gabrielpsz.dextrachallenge.exceptions.EmptyRequestContent;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,7 +59,7 @@ public class CharacterService {
         }
     }
 
-    public List<Comics> getCharacterComics(String id) throws ApiErrorException, HttpStatusCodeException {
+    public List<Comics> getCharacterComics(String id) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
         String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.COMICS_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash);
@@ -69,7 +69,7 @@ public class CharacterService {
             ObjectMapper mapper = new ObjectMapper();
             List<Comics> list = mapper.convertValue(results, new TypeReference<>() { });
             if (list.size() == 0) {
-                throw new ApiErrorException(HttpStatus.NOT_FOUND.value(), "There is no comics for this character.");
+                throw new EmptyRequestContent(HttpStatus.NOT_FOUND.value(), "There is no comics for this character.");
             }
             return list;
         } catch (HttpStatusCodeException e) {
@@ -77,7 +77,7 @@ public class CharacterService {
         }
     }
 
-    public List<Events> getCharacterEvents(String id) throws ApiErrorException, HttpStatusCodeException {
+    public List<Events> getCharacterEvents(String id) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
         String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.EVENTS_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash);
@@ -87,7 +87,7 @@ public class CharacterService {
             ObjectMapper mapper = new ObjectMapper();
             List<Events> list = mapper.convertValue(results, new TypeReference<>() { });
             if (list.size() == 0) {
-                throw new ApiErrorException(HttpStatus.NOT_FOUND.value(), "There is no events for this character.");
+                throw new EmptyRequestContent(HttpStatus.NOT_FOUND.value(), "There is no events for this character.");
             }
             return list;
         } catch (HttpStatusCodeException e) {
@@ -95,7 +95,7 @@ public class CharacterService {
         }
     }
 
-    public List<Series> getCharacterSeries(String id) throws ApiErrorException, HttpStatusCodeException {
+    public List<Series> getCharacterSeries(String id) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
         String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.SERIES_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash);
@@ -105,7 +105,7 @@ public class CharacterService {
             ObjectMapper mapper = new ObjectMapper();
             List<Series> list = mapper.convertValue(results, new TypeReference<>() { });
             if (list.size() == 0) {
-                throw new ApiErrorException(HttpStatus.NOT_FOUND.value(), "There is no series for this character.");
+                throw new EmptyRequestContent(HttpStatus.NOT_FOUND.value(), "There is no series for this character.");
             }
             return list;
         } catch (HttpStatusCodeException e) {
@@ -113,7 +113,7 @@ public class CharacterService {
         }
     }
 
-    public List<Stories> getCharacterStories(String id) throws ApiErrorException, HttpStatusCodeException {
+    public List<Stories> getCharacterStories(String id) throws EmptyRequestContent, HttpStatusCodeException {
         String timestamp = Long.toString(System.currentTimeMillis());
         String md5Hash = getMarvelMd5Hash(timestamp);
         String url = getUrl(MarvelEndpoints.BASE_URL, MarvelEndpoints.STORIES_BY_CHARACTER_ID.replaceAll("\\{id}", id), timestamp, md5Hash);
@@ -123,7 +123,7 @@ public class CharacterService {
             ObjectMapper mapper = new ObjectMapper();
             List<Stories> list = mapper.convertValue(results, new TypeReference<>() { });
             if (list.size() == 0) {
-                throw new ApiErrorException(HttpStatus.NOT_FOUND.value(), "There is no stories for this character.");
+                throw new EmptyRequestContent(HttpStatus.NOT_FOUND.value(), "There is no stories for this character.");
             }
             return list;
         } catch (HttpStatusCodeException e) {

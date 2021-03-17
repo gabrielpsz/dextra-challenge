@@ -1,6 +1,6 @@
 package com.gabrielpsz.dextrachallenge.controller.exceptions;
 
-import com.gabrielpsz.dextrachallenge.exceptions.ApiErrorException;
+import com.gabrielpsz.dextrachallenge.exceptions.EmptyRequestContent;
 import com.gabrielpsz.dextrachallenge.utils.ApiError;
 import com.gabrielpsz.dextrachallenge.utils.Tools;
 import lombok.extern.slf4j.Slf4j;
@@ -17,18 +17,11 @@ import org.springframework.web.client.HttpServerErrorException;
 public class ControllerExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ApiErrorException.class) // 400 error
-    public ResponseEntity<Object> handleApiErrorException(ApiErrorException ex) {
+    @ExceptionHandler(EmptyRequestContent.class) // 400 error
+    public ResponseEntity<Object> handleEmptyRequestContent(EmptyRequestContent ex) {
         ApiError error = new ApiError(ex.getCode(), ex.getStatus());
         return new ResponseEntity(error, HttpStatus.NOT_FOUND);
     }
-
-//    @ExceptionHandler(NonexistentException.class)
-//    public ResponseEntity<Object> handleNonExistentCharacterException(NonexistentException ex) {
-//        log.error("An error occurred processing request " + ex);
-//        ApiError error = new ApiError(HttpStatus.NOT_FOUND.value(), "A character with this ID doesnt exists.");
-//        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
-//    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NumberFormatException.class)
