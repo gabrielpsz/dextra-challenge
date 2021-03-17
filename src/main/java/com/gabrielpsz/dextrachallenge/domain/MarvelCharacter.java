@@ -23,6 +23,10 @@ public class MarvelCharacter {
     private Stories stories;
     private Events events;
     private List<Url> urls;
+
+    public MarvelCharacter(int id) {
+        this.id = id;
+    }
 }
 
 

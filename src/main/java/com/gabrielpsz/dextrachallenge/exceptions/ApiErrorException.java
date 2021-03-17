@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiErrorException extends Exception {
-    private String code;
+    private int code;
     private String status;
 }

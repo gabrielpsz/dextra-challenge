@@ -2,6 +2,7 @@ package com.gabrielpsz.dextrachallenge.constants;
 
 public class MarvelEndpoints {
 
+    public static String BASE_URL = "https://gateway.marvel.com:443";
     public static String CHARACTERS = "/v1/public/characters";
     public static String CHARACTER_BY_ID = "/v1/public/characters/{id}";
     public static String COMICS_BY_CHARACTER_ID = "/v1/public/characters/{id}/comics";

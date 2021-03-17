@@ -10,12 +10,11 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {
 
-    private String code;
-    private String status;
+    private int code;
     private String message;
 
-    public ApiError(String code, String status) {
+    public ApiError(int code, String message) {
         this.code = code;
-        this.status = status;
+        this.message = message;
     }
 }
